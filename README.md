@@ -17,8 +17,6 @@ Here’s a **concise yet comprehensive SQL Server cheat sheet** tailored for int
 - **SQLCMD**: Command-line utility.
 - **PowerShell**: Automation with `SqlServer` module.
 
----
-
 ### **2. T-SQL Queries**
 #### **SELECT Statements**
 ```sql
@@ -138,8 +136,6 @@ WITH EmployeeHierarchy AS (
 SELECT * FROM EmployeeHierarchy;
 ```
 
----
-
 ### **3. Data Modification**
 #### **INSERT**
 ```sql
@@ -196,8 +192,6 @@ WHEN NOT MATCHED THEN
   INSERT (ID, Name, Salary) VALUES (source.ID, source.Name, source.Salary);
 ```
 
----
-
 ### **4. Table Design & Constraints**
 #### **CREATE TABLE**
 ```sql
@@ -249,8 +243,6 @@ ON Employees(Name) INCLUDE (Salary);
 DROP INDEX IX_Employees_Salary ON Employees;
 ```
 
----
-
 ### **5. Views**
 ```sql
 -- Create view
@@ -279,8 +271,6 @@ GROUP BY ProductID;
 GO
 CREATE UNIQUE CLUSTERED INDEX IX_vw_SalesSummary ON vw_SalesSummary(ProductID);
 ```
-
----
 
 ### **6. Stored Procedures**
 ```sql
@@ -319,9 +309,6 @@ BEGIN
   EXEC sp_executesql @SQL;
 END;
 ```
-
----
-
 ### **7. Functions**
 #### **Scalar Functions**
 ```sql
@@ -359,9 +346,6 @@ END;
 -- Usage
 SELECT * FROM dbo.fn_GetTopEarners(5);
 ```
-
----
-
 ### **8. Triggers**
 ```sql
 -- AFTER INSERT trigger
@@ -407,8 +391,6 @@ BEGIN
   ROLLBACK;
 END;
 ```
-
----
 
 ### **9. Transactions & Locking**
 ```sql
@@ -458,8 +440,6 @@ BEGIN CATCH
 END CATCH;
 ```
 
----
-
 ### **10. Error Handling**
 ```sql
 BEGIN TRY
@@ -482,8 +462,6 @@ BEGIN CATCH
 END CATCH;
 ```
 
----
-
 ### **11. Dynamic SQL**
 ```sql
 -- Basic dynamic SQL
@@ -498,8 +476,6 @@ DECLARE @DeptID INT = 3;
 SET @SQL = 'SELECT * FROM Employees WHERE DepartmentID = @DeptID';
 EXEC sp_executesql @SQL, N'@DeptID INT', @DeptID;
 ```
-
----
 
 ### **12. XML & JSON**
 #### **XML**
@@ -544,8 +520,6 @@ WHERE DepartmentID = 1
 FOR JSON PATH;
 ```
 
----
-
 ### **13. Performance Tuning**
 #### **Execution Plans**
 ```sql
@@ -580,8 +554,6 @@ WHERE user_seeks = 0 AND user_scans = 0 AND user_lookups = 0;
 - **Use `WHERE` before `JOIN`** to reduce rows early.
 - **Avoid functions on columns** in `WHERE` (e.g., `WHERE YEAR(HireDate) = 2023`).
 - **Use `EXISTS` instead of `IN`** for large datasets.
-
----
 
 ### **14. SQL Server Security**
 #### **Authentication Modes**
@@ -651,8 +623,6 @@ CREATE SECURITY POLICY Security.DepartmentFilter
 ADD FILTER PREDICATE Security.fn_SecurityPredicate(DepartmentID) ON dbo.Employees;
 ```
 
----
-
 ### **15. Backup & Recovery**
 ```sql
 -- Full backup
@@ -696,8 +666,6 @@ WITH RECOVERY, STOPAT = '2023-10-01T14:00:00';
 | **BULK_LOGGED** | Minimal logging for bulk ops. | Full, Differential, Log (limited) |
 | **SIMPLE** | No log backups; auto-truncates log. | Full, Differential |
 
----
-
 ### **16. High Availability & Disaster Recovery**
 #### **Always On Availability Groups**
 ```sql
@@ -730,8 +698,6 @@ ALTER DATABASE AdventureWorks
 SET PARTNER = 'TCP://SQLServer2:5022';
 ```
 
----
-
 ### **17. SQL Server Agent**
 ```sql
 -- Create a job
@@ -760,8 +726,6 @@ EXEC msdb.dbo.sp_add_jobschedule
 -- Start the job
 EXEC msdb.dbo.sp_start_job @job_name = 'NightlyBackup';
 ```
-
----
 
 ### **18. Common Interview Questions**
 #### **Theory**
@@ -849,8 +813,6 @@ EXEC msdb.dbo.sp_start_job @job_name = 'NightlyBackup';
         EXEC sp_updatestats;
         ```
 
----
-
 ### **19. SQL Server 2022 New Features**
 - **T-SQL Enhancements**:
   - `STRING_SPLIT` with ordinal positions.
@@ -872,5 +834,3 @@ EXEC msdb.dbo.sp_start_job @job_name = 'NightlyBackup';
 
 ---
 **Final Tip**: For interviews, focus on **explaining your thought process** (e.g., why you’d use a CTE vs. a temp table) and **performance considerations**. Practice writing queries on paper/whiteboard!
-
-Need a deeper dive into any topic (e.g., query optimization, Always On)?
